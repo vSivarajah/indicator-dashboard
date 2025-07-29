@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss init:*)",
+      "Bash(mkdir:*)",
+      "Bash(npm run dev:*)",
+      "Bash(go mod:*)",
+      "Bash(mv:*)",
+      "Bash(ls:*)",
+      "Bash(docker-compose up:*)",
+      "Bash(go run:*)",
+      "Bash(pkill:*)",
+      "Bash(rm:*)",
+      "Bash(./node_modules/.bin/tailwindcss:*)",
+      "Bash(curl:*)",
+      "Bash(npm run build:*)",
+      "Bash(pgrep:*)",
+      "Bash(go build:*)",
+      "mcp__context7__resolve-library-id",
+      "mcp__context7__get-library-docs",
+      "Bash(npx:*)",
+      "Bash(timeout 10s npm run dev)",
+      "Bash(true)",
+      "Bash(docker-compose:*)",
+      "Bash(kill:*)",
+      "mcp__sequential-thinking__sequentialthinking"
+    ],
+    "deny": []
+  }
+}

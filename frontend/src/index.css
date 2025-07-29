@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;          /* Deep black background #0a0a0a */
+    --foreground: 0 0% 96%;         /* Pure white text #f5f5f5 */
+    --card: 0 0% 8%;               /* Dark charcoal cards #141414 */
+    --card-foreground: 0 0% 96%;   /* White text on cards */
+    --popover: 0 0% 6%;            /* Slightly lighter than background */
+    --popover-foreground: 0 0% 96%;
+    --primary: 0 0% 96%;           /* Clean white primary */
+    --primary-foreground: 0 0% 4%; /* Dark text on primary */
+    --secondary: 0 0% 12%;         /* Dark secondary #1f1f1f */
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 12%;             /* Same as secondary */
+    --muted-foreground: 0 0% 70%;  /* Light gray muted text */
+    --accent: 35 100% 60%;         /* Subtle orange-gold accent #ff9500 */
+    --accent-foreground: 0 0% 0%;  /* Black text on accent */
+    --destructive: 0 84% 60%;      /* Red for destructive actions */
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 20%;            /* Subtle gray border */
+    --input: 0 0% 12%;             /* Dark input background */
+    --ring: 35 100% 60%;           /* Orange-gold focus ring */
+    --radius: 0.5rem;              /* 8px border radius - more professional */
+    
+    /* Professional orange-gold palette - subtle and refined */
+    --accent-gold: 35 100% 60%;    /* Orange-gold #ff9500 */
+    --accent-gold-muted: 35 50% 40%; /* Muted orange-gold */
+    --accent-gold-subtle: 35 30% 30%; /* Very subtle orange-gold */
+    --border-accent: 35 60% 50% / 0.3; /* Subtle orange-gold border */
+    --border-hover: 35 80% 55% / 0.6;  /* Hover orange-gold border */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+  }
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes lightning-flow {
+  0% {
+    background-position: -200% 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 200% 0;
+    opacity: 0;
+  }
+}
+
+@keyframes subtle-border {
+  0%, 100% {
+    border-color: rgba(255, 149, 0, 0.2);
+  }
+  50% {
+    border-color: rgba(255, 149, 0, 0.4);
+  }
+}
+
+@keyframes subtle-glow {
+  0%, 100% { 
+    box-shadow: 0 0 0 1px rgba(255, 149, 0, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 0 1px rgba(255, 149, 0, 0.3);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInStagger {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.95); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
+}
+
+/* Professional utility classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-subtle-glow {
+  animation: subtle-glow 3s ease-in-out infinite;
+}
+
+.animate-count-up {
+  animation: countUp 0.8s ease-out forwards;
+}
+
+.animate-slide-in-stagger {
+  animation: slideInStagger 0.6s ease-out forwards;
+}
+
+/* Professional hover effects */
+.professional-hover {
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.professional-hover:hover {
+  border-color: hsl(var(--border-accent)) !important;
+  box-shadow: 0 0 0 1px hsl(var(--border-hover)) !important;
+}
+
+/* Subtle accent borders */
+.accent-border {
+  border: 1px solid hsl(var(--border-accent));
+}
+
+.accent-border-hover:hover {
+  border-color: hsl(var(--border-hover));
+  box-shadow: 0 0 0 1px hsl(var(--border-hover));
+}
+
+/* Focus styles for better accessibility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 focus:ring-offset-black;
+}
+
+/* Gradient text utilities */
+.gradient-text {
+  @apply bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% 200%;
+  animation: gold-shimmer 3s ease-in-out infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #FFD700, #DAA520);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #FFA500, #B8860B);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
