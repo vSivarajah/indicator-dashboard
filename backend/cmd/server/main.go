@@ -103,6 +103,49 @@ func main() {
 				"message": "Market cycle endpoint - new implementation coming soon",
 			})
 		})
+
+		// Macro indicators (placeholder endpoints to prevent frontend errors)
+		macro := apiV1.Group("/macro")
+		{
+			macro.GET("/inflation", func(c *gin.Context) {
+				c.JSON(http.StatusOK, gin.H{
+					"success": true,
+					"data": gin.H{
+						"value":       "3.2%",
+						"change":      "+0.1%",
+						"risk_level":  "medium",
+						"status":      "Macro indicators coming soon",
+						"last_updated": time.Now(),
+					},
+				})
+			})
+			
+			macro.GET("/interest-rates", func(c *gin.Context) {
+				c.JSON(http.StatusOK, gin.H{
+					"success": true,
+					"data": gin.H{
+						"value":       "5.25%",
+						"change":      "Unchanged",
+						"risk_level":  "medium", 
+						"status":      "Macro indicators coming soon",
+						"last_updated": time.Now(),
+					},
+				})
+			})
+		}
+
+		// Portfolio risk endpoint (placeholder to prevent frontend errors)
+		apiV1.GET("/portfolio/risk", func(c *gin.Context) {
+			c.JSON(http.StatusOK, gin.H{
+				"success": true,
+				"data": gin.H{
+					"risk_level":     "medium",
+					"risk_score":     45,
+					"recommendation": "Portfolio risk analysis coming soon",
+					"last_updated":   time.Now(),
+				},
+			})
+		})
 	}
 
 	// Create HTTP server

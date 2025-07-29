@@ -9,14 +9,14 @@ const HeroSection = memo(function HeroSection({ cryptoData, loading }) {
   const btcData = cryptoData?.prices?.BTC
   const dominanceData = cryptoData?.dominance
   
-  const btcPrice = btcData?.quote?.USD?.price 
-    ? Math.round(btcData.quote.USD.price).toLocaleString()
+  const btcPrice = btcData?.price 
+    ? Math.round(btcData.price).toLocaleString()
     : '67,432'
-  const btcChange = btcData?.quote?.USD?.percent_change_24h
-    ? `${btcData.quote.USD.percent_change_24h > 0 ? '+' : ''}${btcData.quote.USD.percent_change_24h.toFixed(2)}%`
+  const btcChange = btcData?.percent_change_24h !== undefined
+    ? `${btcData.percent_change_24h > 0 ? '+' : ''}${btcData.percent_change_24h.toFixed(2)}%`
     : '+2.34%'
-  const marketCap = btcData?.quote?.USD?.market_cap
-    ? `${(btcData.quote.USD.market_cap / 1e12).toFixed(2)}T`
+  const marketCap = btcData?.market_cap
+    ? `${(btcData.market_cap / 1e12).toFixed(2)}T`
     : '1.29T'
   const dominanceValue = dominanceData?.current_dominance
     ? `${dominanceData.current_dominance.toFixed(1)}%`

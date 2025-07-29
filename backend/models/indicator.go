@@ -3,6 +3,7 @@ package models
 import (
 	"time"
 	"gorm.io/gorm"
+	"crypto-indicator-dashboard/internal/domain/entities"
 )
 
 // Indicator represents a market indicator
@@ -170,6 +171,7 @@ type DCASimulation struct {
 // AutoMigrate runs database migrations
 func AutoMigrate(db *gorm.DB) error {
 	return db.AutoMigrate(
+		// Legacy models
 		&Indicator{},
 		&PriceData{},
 		&OnChainData{},
@@ -180,5 +182,12 @@ func AutoMigrate(db *gorm.DB) error {
 		&DCAStrategy{},
 		&DCAPurchase{},
 		&DCASimulation{},
+		// New architecture entities
+		&entities.CryptoPrice{},
+		&entities.BitcoinDominance{},
+		&entities.MarketMetrics{},
+		&entities.PriceAlert{},
+		&entities.TradingPair{},
+		&entities.MarketData{},
 	)
 }
