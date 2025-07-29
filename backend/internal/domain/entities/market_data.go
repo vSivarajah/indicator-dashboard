@@ -20,6 +20,11 @@ type CryptoPrice struct {
 	UpdatedAt        time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
+// TableName returns the table name for CryptoPrice
+func (CryptoPrice) TableName() string {
+	return "crypto_prices"
+}
+
 // BitcoinDominance represents Bitcoin market dominance data
 type BitcoinDominance struct {
 	ID                uint      `json:"id" gorm:"primaryKey"`
@@ -32,6 +37,11 @@ type BitcoinDominance struct {
 	Confidence        float64   `json:"confidence"` // Confidence level (0-1)
 	CreatedAt         time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt         time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+// TableName returns the table name for BitcoinDominance
+func (BitcoinDominance) TableName() string {
+	return "bitcoin_dominance"
 }
 
 // MarketMetrics represents overall market metrics
@@ -51,6 +61,11 @@ type MarketMetrics struct {
 	UpdatedAt             time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
+// TableName returns the table name for MarketMetrics
+func (MarketMetrics) TableName() string {
+	return "market_metrics"
+}
+
 // PriceAlert represents a price alert configuration
 type PriceAlert struct {
 	ID            uint      `json:"id" gorm:"primaryKey"`
@@ -65,6 +80,11 @@ type PriceAlert struct {
 	UpdatedAt     time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
+// TableName returns the table name for PriceAlert
+func (PriceAlert) TableName() string {
+	return "price_alerts"
+}
+
 // TradingPair represents a trading pair on an exchange
 type TradingPair struct {
 	ID         uint      `json:"id" gorm:"primaryKey"`
@@ -77,6 +97,11 @@ type TradingPair struct {
 	IsActive   bool      `json:"is_active" gorm:"default:true"`
 	CreatedAt  time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt  time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+// TableName returns the table name for TradingPair
+func (TradingPair) TableName() string {
+	return "trading_pairs"
 }
 
 // MarketDataSummary provides a summary of all market data
@@ -160,6 +185,32 @@ type InterestRateResult struct {
 	LastUpdated      time.Time `json:"last_updated"`
 	DataSource       string    `json:"data_source"`
 	ConfidenceLevel  float64   `json:"confidence_level"`
+}
+
+// MarketData represents unified market data for testing and services
+type MarketData struct {
+	ID            uint      `json:"id" gorm:"primaryKey"`
+	Symbol        string    `json:"symbol" gorm:"index;not null"`
+	Name          string    `json:"name"`
+	Price         float64   `json:"price"`
+	MarketCap     float64   `json:"market_cap"`
+	Volume24h     float64   `json:"volume_24h"`
+	Change24h     float64   `json:"change_24h"`
+	Change7d      float64   `json:"change_7d"`
+	Change30d     float64   `json:"change_30d"`
+	Dominance     float64   `json:"dominance"`
+	CircSupply    float64   `json:"circulating_supply"`
+	MaxSupply     float64   `json:"max_supply"`
+	Source        string    `json:"source"`
+	Confidence    float64   `json:"confidence"`
+	LastUpdated   time.Time `json:"last_updated"`
+	CreatedAt     time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt     time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+// TableName returns the table name for MarketData
+func (MarketData) TableName() string {
+	return "market_data"
 }
 
 // Helper function for absolute value

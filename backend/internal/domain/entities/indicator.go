@@ -23,6 +23,11 @@ type Indicator struct {
 	UpdatedAt    time.Time              `json:"updated_at"`
 }
 
+// TableName returns the table name for Indicator
+func (Indicator) TableName() string {
+	return "indicators"
+}
+
 // MVRVData represents MVRV calculation data
 type MVRVData struct {
 	Date          time.Time `json:"date"`
@@ -95,7 +100,7 @@ type BubbleRiskResult struct {
 
 // MarketCycle represents market cycle analysis
 type MarketCycle struct {
-	ID                uint      `json:"id"`
+	ID                uint      `json:"id" gorm:"primaryKey"`
 	Stage             string    `json:"stage"` // bear, early_bull, mid_bull, late_bull
 	Confidence        float64   `json:"confidence"`
 	DominanceLevel    float64   `json:"dominance_level"`
@@ -105,4 +110,10 @@ type MarketCycle struct {
 	EstimatedDuration int       `json:"estimated_duration"` // months
 	Timestamp         time.Time `json:"timestamp"`
 	CreatedAt         time.Time `json:"created_at"`
+	UpdatedAt         time.Time `json:"updated_at"`
+}
+
+// TableName returns the table name for MarketCycle
+func (MarketCycle) TableName() string {
+	return "market_cycles"
 }

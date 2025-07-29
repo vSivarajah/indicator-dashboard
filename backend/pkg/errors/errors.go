@@ -182,6 +182,16 @@ func IsType(err error, errorType ErrorType) bool {
 	return false
 }
 
+// NewNotFoundError creates a new not found error with entity and identifier
+func NewNotFoundError(entity, identifier string) *AppError {
+	return &AppError{
+		Type:       ErrorTypeNotFound,
+		Message:    fmt.Sprintf("%s not found: %s", entity, identifier),
+		StatusCode: http.StatusNotFound,
+		Details:    fmt.Sprintf("entity: %s, identifier: %s", entity, identifier),
+	}
+}
+
 // GetStatusCode extracts the HTTP status code from an error
 func GetStatusCode(err error) int {
 	if appErr, ok := err.(*AppError); ok {

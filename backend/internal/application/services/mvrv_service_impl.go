@@ -23,6 +23,7 @@ type mvrvServiceImpl struct {
 	cache          cache.CacheService
 	httpClient     *http.Client
 	logger         logger.Logger
+	baseURL        string // Configurable base URL for testing
 }
 
 // NewMVRVService creates a new MVRV service implementation
@@ -32,6 +33,17 @@ func NewMVRVService(
 	cache cache.CacheService,
 	logger logger.Logger,
 ) services.IndicatorService {
+	return NewMVRVServiceWithBaseURL(indicatorRepo, marketDataRepo, cache, logger, "https://api.coingecko.com")
+}
+
+// NewMVRVServiceWithBaseURL creates a new MVRV service with configurable base URL (for testing)
+func NewMVRVServiceWithBaseURL(
+	indicatorRepo repositories.IndicatorRepository,
+	marketDataRepo repositories.MarketDataRepository,
+	cache cache.CacheService,
+	logger logger.Logger,
+	baseURL string,
+) services.IndicatorService {
 	return &mvrvServiceImpl{
 		indicatorRepo:  indicatorRepo,
 		marketDataRepo: marketDataRepo,
@@ -39,7 +51,8 @@ func NewMVRVService(
 		httpClient: &http.Client{
 			Timeout: 30 * time.Second,
 		},
-		logger: logger,
+		logger:  logger,
+		baseURL: baseURL,
 	}
 }
 
@@ -162,7 +175,7 @@ func (s *mvrvServiceImpl) fetchBitcoinData(ctx context.Context) (*CoinGeckoBitco
 
 	// Try to get from cache first (5 minute cache)
 	err := s.cache.GetOrSet(ctx, cacheKey, &btcData, func() (interface{}, error) {
-		url := "https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
+		url := s.baseURL + "/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false"
 
 		s.logger.Debug("Making HTTP request to CoinGecko")
 		req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
